@@ -51,11 +51,10 @@ fun QuickPicks(
     val menuState = LocalMenuState.current
     val playerPadding = LocalPlayerPadding.current
 
-    val viewModel: QuickPicksViewModel = viewModel()
-    val quickPicksSource by rememberPreference(
-        quickPicksSourceKey,
-        QuickPicksSource.Trending
-    )
+    val quickPicksSource = rememberPreference(
+    quickPicksSourceKey,
+    QuickPicksSource.Trending
+).value
 
     LaunchedEffect(quickPicksSource) {
         viewModel.loadQuickPicks(quickPicksSource = quickPicksSource)
@@ -122,10 +121,10 @@ fun QuickPicks(
                                 )
                             }
                         }
-
-                        items(
-                            items = related.songs ?: emptyList(),
-                            key = Innertube.SongItem::key
+items(
+    items = related.songs ?: emptyList(),
+    key = Innertube.SongItem::key
+) 
                         ) { song ->
 
                             SongItem(
